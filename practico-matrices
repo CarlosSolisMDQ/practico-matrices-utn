@@ -1,0 +1,507 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void cargar_matriz(int filas, int columnas, int matrix[filas][columnas]);
+void imprimir_matriz(int filas, int columnas, int matrix[filas][columnas]);
+void imprimir_matriz_string(int filas, int columnas, char matrix[filas][columnas], int validos);
+void cargar_matriz_con_numeros_aleatorios(int filas, int columnas, int matrix[filas][ columnas]);
+int suma_matriz(int filas, int columnas,int  matrix[filas][columnas]);
+float promedio_matriz(int filas, int columnas, int matrix[filas][columnas]);
+int buscar_en_matriz(int filas, int columnas,int matrix[filas][columnas],int elem);
+int carga_de_palabras(int filas, int columnas,char matrix[filas][columnas]);
+int buscar_palabra(int x, char matrix[], int validos, char palabra);
+void ordenar_alfabeticamente(int x,int y,  char matrix[x][y],int validos);
+int determinante_dospordos(int x, int y, int matrix[x][y]);
+int verificar_si_tiene_inversa(int x, int y, int matrix[x][y]);
+void multiplicacion_de_matrices(int x1, int y1, int x2, int y2, int m1[x1][y1], int m2[x2][y2], int m3[x1][y2]);
+void inversa_de_dos_por_dos(int x, int y, int matrix[x][y]);
+int suma_total(int x, int y,int matrix[x][y]);
+
+int main()
+{
+
+
+    printf("TP Matrices\n");
+    
+    //Me falta terminar el ultimo ejercicio y ponerle un menu como Crom manda.
+
+/*
+    int x = 3;
+    int y = 3;
+    int matriz[x][y];
+
+    //cargar_matriz(x, y, matriz);
+
+    cargar_matriz_con_numeros_aleatorios(x, y, matriz);
+
+
+    imprimir_matriz(x, y, matriz);
+
+
+    int result = suma_matriz(x, y, matriz);
+
+    printf("la suma de los elementos de la matriz es %d\n", result);
+
+
+    float promedio = promedio_matriz(x, y, matriz);
+
+    printf("el promedio de los elementos de la matriz es: %.2f\n", promedio);
+
+    int elem = 0;
+    printf("Ingrese el elemento a buscar: ");
+    fflush(stdin);
+    scanf("%d", &elem);
+
+    int flag = buscar_en_matriz(x, y, matriz, elem);
+
+    if (flag == 0){
+        printf("\nel elemento no se encuenta\n");
+    } else {
+        printf("\nel elemento se encuenta\n");
+    }
+*/
+/*
+    x = 10;
+    y = 30;
+    char matrizP[x][y];
+
+    int validos = carga_de_palabras(x, y, matrizP);
+
+    imprimir_matriz_string(x, y, matrizP, validos);
+
+    char palabra;
+    fflush(stdin);
+    //printf("Ingrese la palabra a buscar: ");
+    //scanf("%s", &palabra);
+
+    int flag = buscar_palabra(x, matrizP, validos, palabra);
+
+    if (flag == 0){
+        printf("La palabra no se encuentra\n");
+    } else {
+        printf("La palabra se encuentra\n");
+    }
+
+    ordenar_alfabeticamente(x, y, matrizP, validos);
+
+    imprimir_matriz_string(x, y, matrizP, validos);
+
+*/
+/*
+    int x = 2;
+    int y = 2;
+
+    int matriz[x][y];
+
+    cargar_matriz_con_numeros_aleatorios(x, y, matriz);
+
+    int result = determinante_dospordos(x, y, matriz);
+
+    imprimir_matriz(x, y, matriz);
+
+    printf("El determinante de la matriz es: %d", result);
+
+    int flag = verificar_si_tiene_inversa(x, y, matriz);
+
+    if (flag == 1){
+        printf("\nLa matriz tiene inversa");
+    } else {
+        printf("\nLa matriz no tiene inversa");
+    }
+
+*/
+/*
+    int x1 = 2;
+    int y1 = 2;
+    int x2 = 2;
+    int y2 = 5;
+    int m1[x1][y1];
+    int m2[x2][y2];
+    int m3[x1][y2];
+
+    cargar_matriz_con_numeros_aleatorios(x1, y1, m1);
+
+    imprimir_matriz(x1, y1, m1);
+
+    printf("\n");
+
+    cargar_matriz_con_numeros_aleatorios(x2, y2, m2);
+
+    imprimir_matriz(x2, y2, m2);
+
+    printf("\n");
+
+    multiplicacion_de_matrices(x1, y1, x2, y2, m1, m2, m3);
+
+    imprimir_matriz(x1, y2, m3);
+*/
+
+/*
+    printf("Inversa de una matriz 2x2\n");
+
+    int x = 2;
+    int y = 2;
+
+    int matriz[x][y];
+
+
+
+    cargar_matriz_con_numeros_aleatorios(x, y, matriz);
+
+    imprimir_matriz(x, y, matriz);
+
+    printf("\n");
+
+    inversa_de_dos_por_dos(x, y, matriz);
+
+    imprimir_matriz(x, y, matriz);
+*/
+
+    //errglo en vectores los distritos
+
+
+
+    int matrix[5][4] = {{194,48,206,45}, {180,20,320,16} , {221,90,140,20}, {432,51,821,14}, {820,61,946,18}};
+
+    printf("distrito candidatoA candidatoB candidatoC candidatoD\n");
+    for (int i = 0; i < 5; i++){
+        printf("    %d", i+1);
+        for (int j = 0; j < 4; j++){
+            printf("        %d", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+
+
+
+
+
+/*
+    int miMatrix[10][20]; /// una matriz de 10 filas por 20 columnas
+
+    int f=0;
+    int c=0;
+
+    for (f=0; f<10; f++)
+    {
+        for(c=0; c<20; c++)
+        {
+            miMatrix[f][c]=rand()%100;
+        }
+    }
+
+    printf("Mostrando la matrix vithe...\n\n");
+
+    for (f=0; f<10; f++)
+    {
+        for(c=0; c<20; c++)
+        {
+            if(miMatrix[f][c]<10)
+                printf("[0%d]", miMatrix[f][c]);
+            else
+                printf("[%d]", miMatrix[f][c]);
+        }
+        printf("\n");
+    }
+
+    system("pause");
+    char misPalabras[10][20];
+
+    char control ='s';
+    int i =0;
+    while(i<10 && control=='s')
+    {
+        printf("Ingrese una palabra a su arreglo de palabras: ");
+        fflush(stdin);
+        scanf("%s", &misPalabras[i]);
+
+        printf("¿Desea continuar con esta tortura? s/n\n");
+        fflush(stdin);
+        scanf("%c", &control);
+        i++;
+    }
+
+    int palabrasValidas=i;
+
+    printf("\nMis palabras son:\n");
+    for(i=0; i<palabrasValidas;i++)
+    {
+        printf("%s\n", misPalabras[i]);
+    }
+*/
+    return 0;
+}
+
+void cargar_matriz(int filas, int columnas, int matrix[filas][columnas]){
+    int x = 0;
+    int y = 0;
+
+    for (int i = 0; i < filas; ++i) {
+        for (int j = 0; j < columnas; ++j) {
+            printf("Ingrese el elemento [%d] [%d]: ", i, j);
+            scanf("%d", &matrix[i][j]);
+        }
+    }
+
+}
+
+void imprimir_matriz(int filas, int columnas, int matrix[filas][columnas]){
+    for (int i = 0; i < filas; i++) {
+        for (int j = 0; j < columnas; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+
+}
+
+void imprimir_matriz_string(int filas, int columnas, char matrix[filas][columnas], int validos){
+    for (int i = 0; i < validos; ++i) {
+
+            printf("%s ", matrix[i]);
+
+        printf("\n");
+    }
+
+}
+
+void cargar_matriz_con_numeros_aleatorios(int filas, int columnas, int matrix[filas][columnas]){
+    srand(time(NULL));
+    for (int i = 0; i < filas; i++)
+    {
+        for(int j = 0; j < columnas; j++)
+        {
+            int prueba = rand()%10;;
+            matrix[i][j] = rand()%10;
+        }
+    }
+
+}
+
+int suma_matriz(int filas, int columnas,int matrix[filas][columnas]){
+    int acumulador = 0;
+    for (int i = 0; i < filas; i ++)
+    {
+        for(int j = 0; j < columnas; j++)
+        {
+            acumulador += matrix[i][j];
+        }
+    }
+    return acumulador;
+}
+
+float promedio_matriz(int filas, int columnas, int matrix[filas][columnas]){
+    int suma = suma_matriz(filas, columnas, matrix);
+    int cantElem = filas * columnas;
+    float promedio = (float)suma/ (float)cantElem;
+
+    return promedio;
+
+}
+
+int buscar_en_matriz(int filas, int columnas,int matrix[filas][columnas],int elem){
+    int flag = 0;
+    for (int i = 0; i < filas; i ++)
+    {
+        for(int j = 0; j < columnas; j++)
+        {
+            if (matrix[i][j]  == elem){
+                flag = 1;
+            }
+        }
+    }
+    return flag;
+}
+
+int carga_de_palabras(int filas, int columnas,char matrix[filas][columnas]){
+    char control ='s';
+    int i = 0;
+    while(i < 10 && control == 's')
+    {
+        printf("Ingrese una palabra al arreglo: ");
+        fflush(stdin);
+        scanf("%s", &matrix[i]);
+
+        printf("Desea continuar? s/n\n");
+        fflush(stdin);
+        scanf("%c", &control);
+        i++;
+    }
+    return i;
+}
+
+int buscar_palabra(int x, char matrix[], int validos, char palabra){
+    int flag = 0;
+    for (int i = 0; i < validos; ++i) {
+        if (palabra == matrix[i]){
+            flag = 1;
+        }
+    }
+    return flag;
+}
+
+void ordenar_alfabeticamente(int x, int y, char matrix[x][y],int validos){
+     int actual;
+     int menor;
+     int j;
+     char temp[y];
+
+     for (actual = 0; actual < validos - 1; actual++){
+         menor = actual;
+         for (j = actual + 1; j < validos; j++){
+              if (matrix[j][0] < matrix[menor][0]){
+                  menor = j;
+              }
+          strcpy(temp, matrix[actual]);
+          strcpy(matrix[actual], matrix[menor]);
+          strcpy(matrix[menor], temp);
+     }
+}
+
+}
+
+int determinante_dospordos(int x, int y, int matrix[x][y]){
+    int aux = 0;
+    int aux2 = 0;
+    int result;
+    aux = matrix[0][0]*matrix[1][1];
+    aux2 = matrix[1][0]*matrix[0][1];
+    result = aux - aux2;
+    return result;
+}
+
+int verificar_si_tiene_inversa(int x, int y, int matrix[x][y]){
+    int flag = 0;
+    if(0 != determinante_dospordos(x, y, matrix)){
+        flag = 1;
+    }
+    return flag;
+}
+
+void multiplicacion_de_matrices(int x1, int y1, int x2, int y2, int m1[x1][y1], int m2[x2][y2], int m3[x1][y2]){
+    // si no inicializo la matriz resultante en 0 me termina mostrando cualqueir cosa.
+    for (int i = 0; i < x1; ++i) {
+        for (int j = 0; j < y2; ++j) {
+            m3[i][j] = 0;
+        }
+    }
+
+    for (int i = 0; i < x1; ++i) {
+        for (int j = 0; j < y2; ++j) {
+            for (int k = 0; k < y1; ++k) {
+                m3[i][j] += m1[i][k] * m2[k][j];
+            }
+        }
+    }
+}
+
+
+void inversa_de_dos_por_dos(int x, int y, int matrix[x][y]){
+    int flag = verificar_si_tiene_inversa(x, y, matrix);
+    if (flag == 0){
+        printf("la matriz no tiene inversa");
+    }
+    int aux = 0;
+    aux = matrix[0][0];
+    matrix[0][0] = matrix[1][1];
+    matrix[1][1] = aux;
+
+
+    aux = matrix[0][1];
+    matrix[0][1] = -1 * matrix[1][0];
+    matrix[1][0] = -1 * aux;
+}
+
+int suma_total(int y,int matrix[y]){
+    int total = 0;
+    for(int i = 0; i < y; i++){
+          total += matrix[j];
+    }
+    return total;
+}
+
+int suma_de_candidatos(int x, int y, matrix[x][y]){
+    
+    //esta funcion revuelve un vector de 5 elementos.
+    int result[y];
+    int sumCol=0;
+    for(int i = 0; i < y; i++){
+        for(int j = 0; j < x; j++){
+          sumCol += matrix[j][i];
+        }
+        result[y] = sumCol;
+    }
+    return result;
+}
+
+void candidato_mas_votado(int x, int matrix[x]){
+    int posicion = 0;
+    int aux = matrix[0];
+    int i =0;
+    while (i < x){
+        if (aux < matrix[i]){
+            aux = matrix[i]
+            posicion = i;
+        }
+        i++; 
+    }
+    return posicion;
+}
+
+float imprimir_porcentaje_de_cada_candidato(int x, int vector[x],int total){
+    float result[x];
+    for (int i = 0; i < x; i++){
+        result[i] = (total * 100)/vector[i];
+    }
+    return result;
+}
+
+int chequeo_del_50(int x, int vector[x]){
+    int flag = 0;
+    for (int i = 0; i < x; i++){
+        if (vector[i] > 50){
+            printf("el ganador es el candidato: %d", i);
+            flag = 1
+        }
+    }
+    return flag;
+}
+
+int los_2_mas_votados(int x; int vector[x]){
+    int vectorsolucion[2];
+    //buscamos el mayor lo copiamos y lo eliminamos;
+    for (int i = 0; i < 2; i++){
+        vectorsolucion[i] = buscar_mayor_en_vector(x, vector);
+        eliminar_mayor_en_vector(x, vector);
+    }
+       
+}
+
+int buscar_mayor_en_vector(int x, int vector[x]){
+    int aux = 0;
+    aux = vector[0];
+    aux2 = 0;
+    for (int i = 0; i< x; i++){
+        if (aux < vector[i]){
+            aux = vector[i];
+            aux2 = i;
+        }
+    }
+    return aux2;
+}
+
+void eliminar_mayor_en_vector(int x, int vector[x]){
+    int aux = 0;
+    aux = vector[0];
+    aux2 = 0;
+    for (int i = 0; i< x; i++){
+        if (aux < vector[i]){
+            aux = vector[i];
+            aux2 = i;
+        }
+    }
+    vector[aux2] = 0;
+    
+}
