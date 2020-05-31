@@ -17,16 +17,27 @@ int verificar_si_tiene_inversa(int x, int y, int matrix[x][y]);
 void multiplicacion_de_matrices(int x1, int y1, int x2, int y2, int m1[x1][y1], int m2[x2][y2], int m3[x1][y2]);
 void inversa_de_dos_por_dos(int x, int y, int matrix[x][y]);
 int suma_total(int x, int y,int matrix[x][y]);
+void suma_de_candidatos(int x, int y,int matrix[x][y], int sum[y]);
+void candidato_mas_votado(int x, int matrix[x]);
+void imprimir_porcentaje_de_cada_candidato(int x, int vector[x],int total, float result[x]);
+int chequeo_del_50(int x, int vector[x]);
+int los_2_mas_votados(int x, int vector[x]);
+int buscar_mayor_en_vector(int x, float vector[x]);
+void eliminar_mayor_en_vector(int x, int vector[x]);
+void imprimir_vector(int x, float vector[x]);
+
 
 int main()
 {
 
 
     printf("TP Matrices\n");
-    
-    //Me falta terminar el ultimo ejercicio y ponerle un menu como Crom manda.
 
 /*
+
+
+    //puntos 1 al 6 del practico.
+
     int x = 3;
     int y = 3;
     int matriz[x][y];
@@ -62,6 +73,9 @@ int main()
     }
 */
 /*
+
+    //puntos 7, 8 ,9, 10 del practico.
+
     x = 10;
     y = 30;
     char matrizP[x][y];
@@ -89,6 +103,8 @@ int main()
 
 */
 /*
+    //puntos 11 y 12, determinar si tiene inversa y calcular el determinante.
+
     int x = 2;
     int y = 2;
 
@@ -112,6 +128,8 @@ int main()
 
 */
 /*
+    //punto 13, multiplicacion de matrices 2x2 y 2x5
+
     int x1 = 2;
     int y1 = 2;
     int x2 = 2;
@@ -138,6 +156,9 @@ int main()
 */
 
 /*
+
+    //inversa de matriz 2x2.
+
     printf("Inversa de una matriz 2x2\n");
 
     int x = 2;
@@ -158,13 +179,16 @@ int main()
     imprimir_matriz(x, y, matriz);
 */
 
-    //errglo en vectores los distritos
 
+
+//programa para las elecciones a intendente
+
+    printf("\nElecciones a intendente de villa matriz\n\n");
 
 
     int matrix[5][4] = {{194,48,206,45}, {180,20,320,16} , {221,90,140,20}, {432,51,821,14}, {820,61,946,18}};
 
-    printf("distrito candidatoA candidatoB candidatoC candidatoD\n");
+    printf("distrito candidato-1 candidato-2 candidato-3 candidato-4\n");
     for (int i = 0; i < 5; i++){
         printf("    %d", i+1);
         for (int j = 0; j < 4; j++){
@@ -172,6 +196,43 @@ int main()
         }
         printf("\n");
     }
+
+    int total = suma_total(5, 4, matrix);
+
+    printf("\nSuma total de votos %d", total);
+
+    int sum[4];
+
+    suma_de_candidatos(5, 4, matrix, sum);
+
+    printf("\n\nEl total de votos de cada candidato es:\n");
+    printf("\nCandidato 1:%d Candidato 2:%d Candidato 3:%d Candidato 4:%d\n", sum[0], sum[1], sum[2], sum[3], sum[4]);
+
+    float result[4];
+
+    imprimir_porcentaje_de_cada_candidato(4, sum, total, result);
+
+    printf("\nPorcentaje de votos de cada candidato: \n\n");
+    printf(" Candidato 1:%.2f\n Candidato 2:%.2f\n Candidato 3:%.2f\n Candidato 4:%.2f\n\n", result[0], result[1], result[2], result[3], result[4]);
+
+    //imprimir_vector(4, result);
+
+    int posicion = chequeo_del_50(4, result);
+
+    int primero_y_segundo[2];
+    for(int c = 0; c < 2; c++){
+        int mayor = buscar_mayor_en_vector(4, result);
+        primero_y_segundo[c] = mayor;
+        eliminar_mayor_en_vector(4, result);
+    }
+
+    printf("\nEl candidato mas votado es: %d y el segundo mas votado es: %d\n\n", primero_y_segundo[0], primero_y_segundo[1]);
+
+
+
+
+
+
 
 
 
@@ -412,28 +473,34 @@ void inversa_de_dos_por_dos(int x, int y, int matrix[x][y]){
     aux = matrix[0][1];
     matrix[0][1] = -1 * matrix[1][0];
     matrix[1][0] = -1 * aux;
+
 }
 
-int suma_total(int y,int matrix[y]){
-    int total = 0;
-    for(int i = 0; i < y; i++){
-          total += matrix[j];
-    }
-    return total;
-}
+//funciones para el programa de las elecciones
 
-int suma_de_candidatos(int x, int y, matrix[x][y]){
-    
-    //esta funcion revuelve un vector de 5 elementos.
-    int result[y];
-    int sumCol=0;
-    for(int i = 0; i < y; i++){
-        for(int j = 0; j < x; j++){
-          sumCol += matrix[j][i];
+int suma_total(int x, int y, int matrix[x][y]){
+    int acumulador = 0;
+    for (int i = 0; i < x; i ++)
+    {
+        for(int j = 0; j < y; j++)
+        {
+            acumulador += matrix[i][j];
         }
-        result[y] = sumCol;
     }
-    return result;
+    return acumulador;
+}
+
+void suma_de_candidatos(int x, int y,int matrix[x][y],int sum[y]){
+    int pepe = 0;
+    //esta funcion revuelve un vector de 5 elementos.
+    for(int i = 0; i < y; i++){
+        pepe = 0;
+        for(int j = 0; j < x; j++){
+         pepe  = pepe + matrix[j][i];
+        }
+    sum[i] = pepe;
+    }
+
 }
 
 void candidato_mas_votado(int x, int matrix[x]){
@@ -442,51 +509,57 @@ void candidato_mas_votado(int x, int matrix[x]){
     int i =0;
     while (i < x){
         if (aux < matrix[i]){
-            aux = matrix[i]
+            aux = matrix[i];
             posicion = i;
         }
-        i++; 
+        i++;
     }
     return posicion;
 }
 
-float imprimir_porcentaje_de_cada_candidato(int x, int vector[x],int total){
-    float result[x];
+void imprimir_porcentaje_de_cada_candidato(int x, int vector[x], int total, float result[x]){
     for (int i = 0; i < x; i++){
-        result[i] = (total * 100)/vector[i];
+         float aux = (float)vector[i]/total;
+         aux = aux * 100;
+         result[i] = aux;
     }
-    return result;
+
 }
 
 int chequeo_del_50(int x, int vector[x]){
+    int posicion = 0;
     int flag = 0;
     for (int i = 0; i < x; i++){
         if (vector[i] > 50){
-            printf("el ganador es el candidato: %d", i);
-            flag = 1
+            //printf("el ganador es el candidato: %d", i);
+            posicion = i;
+            flag = 1;
         }
     }
-    return flag;
+    if (flag == 1){
+        printf("el ganador es el candidato: %d\n", posicion);
+    }
+    return posicion;
 }
 
-int los_2_mas_votados(int x; int vector[x]){
+int los_2_mas_votados(int x, int vector[x]){
     int vectorsolucion[2];
     //buscamos el mayor lo copiamos y lo eliminamos;
     for (int i = 0; i < 2; i++){
         vectorsolucion[i] = buscar_mayor_en_vector(x, vector);
         eliminar_mayor_en_vector(x, vector);
     }
-       
+    return vectorsolucion;
 }
 
-int buscar_mayor_en_vector(int x, int vector[x]){
+int buscar_mayor_en_vector(int x, float vector[x]){
     int aux = 0;
     aux = vector[0];
-    aux2 = 0;
+    int aux2 = 0;
     for (int i = 0; i< x; i++){
         if (aux < vector[i]){
             aux = vector[i];
-            aux2 = i;
+            aux2 = i+1;
         }
     }
     return aux2;
@@ -495,7 +568,7 @@ int buscar_mayor_en_vector(int x, int vector[x]){
 void eliminar_mayor_en_vector(int x, int vector[x]){
     int aux = 0;
     aux = vector[0];
-    aux2 = 0;
+    int aux2 = 0;
     for (int i = 0; i< x; i++){
         if (aux < vector[i]){
             aux = vector[i];
@@ -503,5 +576,11 @@ void eliminar_mayor_en_vector(int x, int vector[x]){
         }
     }
     vector[aux2] = 0;
-    
+
+}
+
+void imprimir_vector(int x, float vector[x]){
+    for (int i = 0; i< x; i++){
+        printf("  %.2f  ", vector[i]);
+    }
 }
